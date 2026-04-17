@@ -3,9 +3,6 @@
  * 应用启动时自动检查并更新本地缓存数据，不阻塞UI
  */
 
-import { dataService } from '@/services/data'
-import { logger } from '@/utils/log'
-
 // 自动更新配置
 const AUTO_UPDATE_CONFIG = {
   // 是否启用自动更新
@@ -48,7 +45,7 @@ export function getUpdateStatus(): UpdateStatus {
 /**
  * 检查数据是否需要更新
  */
-function needsUpdate(symbolMeta: { last_update: string | null }): boolean {
+export function needsUpdate(symbolMeta: { last_update: string | null }): boolean {
   if (!symbolMeta.last_update) return true
 
   const lastUpdate = new Date(symbolMeta.last_update)
