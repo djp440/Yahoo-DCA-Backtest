@@ -32,17 +32,17 @@
 ## 🚩 阶段2：数据层开发 (Milestone 2)
 | ID | 任务描述 | 对应文件 | 验收标准 | 状态 |
 |----|----------|----------|----------|------|
-| 2.1 | 品种价格表迁移 | `migrations/20240417_create_price_data_table.sql` | 创建price_data表，包含symbol、date、open、high、low、close、volume字段 | ⏳ 待开始 |
-| 2.2 | 品种元数据表迁移 | `migrations/20240417_create_symbol_meta_table.sql` | 创建symbol_meta表，包含symbol、name、type、last_update、data_range字段 | ⏳ 待开始 |
-| 2.3 | Yahoo Finance API封装 | `src-tauri/src/yahoo.rs` | 封装yahoo-finance2接口，实现日K线数据下载，支持按时间范围查询 | ⏳ 待开始 |
-| 2.4 | 数据层Rust接口实现 | `src-tauri/src/data.rs` | 实现数据保存、查询、更新、删除接口，本地缓存逻辑 | ⏳ 待开始 |
-| 2.5 | 注册数据层Tauri命令 | `src-tauri/src/main.rs` | 注册data_fetch、data_query、data_update、data_export命令 | ⏳ 待开始 |
-| 2.6 | 数据服务前端封装 | `src/services/data.ts` | 封装数据查询、下载、更新、导出的前端调用接口 | ⏳ 待开始 |
-| 2.7 | 基础表单组件实现 | `src/components/form/Input.vue` | 输入框样式符合UI规范，支持focus/hover/error状态 | ⏳ 待开始 |
-| 2.8 | 日期选择组件实现 | `src/components/form/DatePicker.vue` | 明亮风格，支持范围选择，样式符合设计规范 | ⏳ 待开始 |
-| 2.9 | 下拉选择组件实现 | `src/components/form/Select.vue` | 支持单选、多选，下拉菜单动画效果流畅 | ⏳ 待开始 |
-| 2.10 | 数据管理页基础结构 | `src/views/DataManager.vue` | 布局符合UI设计，包含搜索框、表格区域、操作按钮 | ⏳ 待开始 |
-| 2.11 | 虚拟表格组件实现 | `src/components/common/VirtualTable.vue` | 支持虚拟滚动、列宽调整、固定首列，性能流畅 | ⏳ 待开始 |
+| 2.1 | 品种价格表迁移 | `migrations/20240417_create_price_data_table.sql` | 创建price_data表，包含symbol、date、open、high、low、close、volume字段 | ✅ 已完成 |
+| 2.2 | 品种元数据表迁移 | `migrations/20240417_create_symbol_meta_table.sql` | 创建symbol_meta表，包含symbol、name、type、last_update、data_range字段 | ✅ 已完成 |
+| 2.3 | Yahoo Finance API封装 | `src-tauri/src/yahoo.rs` | 封装yahoo-finance2接口，实现日K线数据下载，支持按时间范围查询 | ✅ 已完成 |
+| 2.4 | 数据层Rust接口实现 | `src-tauri/src/data.rs` | 实现数据保存、查询、更新、删除接口，本地缓存逻辑 | ✅ 已完成 |
+| 2.5 | 注册数据层Tauri命令 | `src-tauri/src/main.rs` | 注册data_fetch、data_query、data_update、data_export命令 | ✅ 已完成 |
+| 2.6 | 数据服务前端封装 | `src/services/data.ts` | 封装数据查询、下载、更新、导出的前端调用接口 | ✅ 已完成 |
+| 2.7 | 基础表单组件实现 | `src/components/form/Input.vue` | 输入框样式符合UI规范，支持focus/hover/error状态 | ✅ 已完成 |
+| 2.8 | 日期选择组件实现 | `src/components/form/DatePicker.vue` | 明亮风格，支持范围选择，样式符合设计规范 | ✅ 已完成 |
+| 2.9 | 下拉选择组件实现 | `src/components/form/Select.vue` | 支持单选、多选，下拉菜单动画效果流畅 | ✅ 已完成 |
+| 2.10 | 数据管理页基础结构 | `src/views/DataManager.vue` | 布局符合UI设计，包含搜索框、表格区域、操作按钮 | ✅ 已完成 |
+| 2.11 | 虚拟表格组件实现 | `src/components/common/VirtualTable.vue` | 支持虚拟滚动、列宽调整、固定首列，性能流畅 | ✅ 已完成 |
 | 2.12 | 启动自动更新数据逻辑 | `src/utils/autoUpdate.ts` | 应用启动时自动检查并更新本地数据，不阻塞UI | ✅ 已完成 |
 
 ---
