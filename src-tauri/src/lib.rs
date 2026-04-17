@@ -1,8 +1,11 @@
 pub mod db;
 pub mod log;
+pub mod data;
+pub mod yahoo;
 
 use crate::db::DbManager;
 use crate::log::{LogEntry, LogLevel, LogModule, LogQueryParams, LogService};
+use crate::data::{DataService, PriceQueryParams, SymbolListParams, SymbolMeta};
 use ::log::LevelFilter;
 use serde::{Deserialize, Serialize};
 use std::sync::Mutex;
@@ -12,6 +15,7 @@ use tauri::{Manager, State};
 struct AppState {
     db: Mutex<Option<DbManager>>,
     log_service: Mutex<Option<LogService>>,
+    data_service: Mutex<Option<DataService>>,
 }
 
 /// Tauri命令响应格式
@@ -124,12 +128,92 @@ async fn log_clear(
     }
 }
 
+#[tauri::command]
+async fn data_store(
+    symbol: String,
+    quote: yahoo::YahooQuote,
+    prices: Vec<yahoo::PriceBar>,
+    state: State<'_, AppState>,
+) -> Result<CommandResult<yahoo::FetchDataResult>, String> {
+    let mut data_service = state.data_service.lock().unwrap();
+    if let Some(service) = data_service.as_mut() {
+        if let Err(e) = service.upsert_symbol(&quote) {
+            return Ok(CommandResult::error(format!("保存品种信息失败: {}", e)));
+        }
+
+        match service.save_price_data(&symbol, &prices) {
+            Ok(count) => {
+                let first_date = prices.first().map(|p| p.date.clone()).unwrap_or_default();
+                let last_date = prices.last().map(|p| p.date.clone()).unwrap_or_default();
+                Ok(CommandResult::success(yahoo::FetchDataResult {
+                    symbol,
+                    count,
+                    first_date,
+                    last_date,
+                }))
+            }
+            Err(e) => Ok(CommandResult::error(format!("保存价格数据失败: {}", e))),
+        }
+    } else {
+        Ok(CommandResult::error("数据服务未初始化".to_string()))
+    }
+}
+
+#[tauri::command]
+async fn data_query(
+    params: PriceQueryParams,
+    state: State<'_, AppState>,
+) -> Result<CommandResult<Vec<yahoo::PriceBar>>, String> {
+    let data_service = state.data_service.lock().unwrap();
+    if let Some(service) = data_service.as_ref() {
+        match service.query_prices(params) {
+            Ok(prices) => Ok(CommandResult::success(prices)),
+            Err(e) => Ok(CommandResult::error(e.to_string())),
+        }
+    } else {
+        Ok(CommandResult::error("数据服务未初始化".to_string()))
+    }
+}
+
+#[tauri::command]
+async fn data_list_symbols(
+    params: SymbolListParams,
+    state: State<'_, AppState>,
+) -> Result<CommandResult<Vec<SymbolMeta>>, String> {
+    let data_service = state.data_service.lock().unwrap();
+    if let Some(service) = data_service.as_ref() {
+        match service.list_symbols(params) {
+            Ok(symbols) => Ok(CommandResult::success(symbols)),
+            Err(e) => Ok(CommandResult::error(e.to_string())),
+        }
+    } else {
+        Ok(CommandResult::error("数据服务未初始化".to_string()))
+    }
+}
+
+#[tauri::command]
+async fn data_delete_symbol(
+    symbol: String,
+    state: State<'_, AppState>,
+) -> Result<CommandResult<usize>, String> {
+    let mut data_service = state.data_service.lock().unwrap();
+    if let Some(service) = data_service.as_mut() {
+        match service.delete_symbol(&symbol) {
+            Ok(count) => Ok(CommandResult::success(count)),
+            Err(e) => Ok(CommandResult::error(e.to_string())),
+        }
+    } else {
+        Ok(CommandResult::error("数据服务未初始化".to_string()))
+    }
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .manage(AppState {
             db: Mutex::new(None),
             log_service: Mutex::new(None),
+            data_service: Mutex::new(None),
         })
         .setup(|app| {
             if cfg!(debug_assertions) {
@@ -140,20 +224,22 @@ pub fn run() {
                 )?;
             }
 
-            // 初始化数据库和日志服务
-            let db = DbManager::new(app.handle())?;
-            let mut log_service = LogService::new(db);
+            let mut db = DbManager::new(app.handle())?;
+            db.run_migrations()?;
 
-            // 运行迁移
-            log_service.db.run_migrations()?;
+            let log_service = LogService::new(DbManager::new(app.handle())?);
+            let data_service = DataService::new(DbManager::new(app.handle())?);
 
-            // 保存到状态
             let app_state = app.state::<AppState>();
             *app_state.log_service.lock().unwrap() = Some(log_service);
+            *app_state.data_service.lock().unwrap() = Some(data_service);
 
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![log_write, log_query, log_clear])
+        .invoke_handler(tauri::generate_handler![
+            log_write, log_query, log_clear,
+            data_store, data_query, data_list_symbols, data_delete_symbol,
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
