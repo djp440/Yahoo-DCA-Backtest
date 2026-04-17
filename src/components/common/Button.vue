@@ -12,16 +12,21 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-type ButtonType = 'primary' | 'secondary' | 'text' | 'danger'
+type ButtonVariant = 'primary' | 'secondary' | 'text' | 'danger'
+type ButtonSize = 'small' | 'medium' | 'large'
 
 interface Props {
-  type?: ButtonType
+  variant?: ButtonVariant
+  size?: ButtonSize
+  danger?: boolean
   disabled?: boolean
   loading?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  type: 'primary',
+  variant: 'primary',
+  size: 'medium',
+  danger: false,
   disabled: false,
   loading: false,
 })
@@ -32,12 +37,18 @@ const emit = defineEmits<{
 
 const buttonClasses = computed(() => {
   const baseClasses = [
-    'px-4 py-2 rounded-button font-medium transition-all duration-150',
+    'rounded-button font-medium transition-all duration-150',
     'focus:outline-none focus:ring-2 focus:ring-primary/50',
     'disabled:opacity-50 disabled:cursor-not-allowed',
   ]
 
-  const typeClasses: Record<ButtonType, string[]> = {
+  const sizeClasses: Record<ButtonSize, string[]> = {
+    small: ['px-2 py-1 text-xs'],
+    medium: ['px-4 py-2'],
+    large: ['px-6 py-3 text-lg'],
+  }
+
+  const typeClasses: Record<ButtonVariant, string[]> = {
     primary: [
       'bg-primary text-white',
       'hover:bg-primary-dark active:bg-primary-dark/90',
@@ -56,7 +67,9 @@ const buttonClasses = computed(() => {
     ],
   }
 
-  return [...baseClasses, ...typeClasses[props.type]]
+  const variant = props.danger ? 'danger' : props.variant
+
+  return [...baseClasses, ...sizeClasses[props.size], ...typeClasses[variant]]
 })
 
 function handleClick(event: MouseEvent) {

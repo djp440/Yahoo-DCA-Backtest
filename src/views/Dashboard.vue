@@ -7,7 +7,7 @@
         <p class="text-body text-neutral-400 mt-1">开始一个新的回测或查看历史记录</p>
       </div>
       <div class="flex space-x-3">
-        <Button type="primary">
+        <Button variant="primary">
           <span class="flex items-center">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -42,7 +42,7 @@
     <Card>
       <div class="flex items-center justify-between mb-4">
         <h2 class="text-heading-2 text-neutral-500 font-semibold">最近回测</h2>
-        <Button type="text">查看全部</Button>
+        <Button variant="text">查看全部</Button>
       </div>
       <div class="text-body text-neutral-300 text-center py-8">
         暂无回测记录，点击右上角"新建回测"开始
