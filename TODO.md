@@ -50,55 +50,55 @@
 ## 🚩 阶段3：回测引擎核心开发 (Milestone 3)
 | ID | 任务描述 | 对应文件 | 验收标准 | 状态 |
 |----|----------|----------|----------|------|
-| 3.1 | 回测记录数据表迁移 | `migrations/20240418_create_backtest_record_table.sql` | 创建backtest_record表，保存回测配置、结果、创建时间 | ⏳ 待开始 |
-| 3.2 | 基础定投策略Rust实现 | `src-tauri/src/backtest/strategies/fixed_invest.rs` | 普通定投策略逻辑，支持周/双周/月频率，参数可配置 | ⏳ 待开始 |
-| 3.3 | 价值平均策略Rust实现 | `src-tauri/src/backtest/strategies/value_averaging.rs` | 价值平均策略逻辑，动态调整每次投入金额 | ⏳ 待开始 |
-| 3.4 | 指标计算模块Rust实现 | `src-tauri/src/backtest/metrics.rs` | 实现PRD要求的所有收益、风险、风险调整收益、定投相关指标计算 | ⏳ 待开始 |
-| 3.5 | 回测引擎核心逻辑 | `src-tauri/src/backtest/engine.rs` | 实现回测主逻辑，多品种组合支持，异步计算，可取消 | ⏳ 待开始 |
-| 3.6 | 注册回测Tauri命令 | `src-tauri/src/main.rs` | 注册backtest_run、backtest_query、backtest_delete命令 | ⏳ 待开始 |
-| 3.7 | 回测服务前端封装 | `src/services/backtest.ts` | 封装回测启动、查询、删除、导出接口，支持进度监听 | ⏳ 待开始 |
-| 3.8 | 回测配置页基础结构 | `src/views/BacktestConfig.vue` | 侧边步骤栏、基础配置区、品种配置区、策略配置区布局符合设计 | ⏳ 待开始 |
-| 3.9 | 品种选择组件实现 | `src/components/backtest/SymbolSelector.vue` | 支持搜索、多选、权重配置，界面符合设计规范 | ⏳ 待开始 |
-| 3.10 | 策略参数配置组件实现 | `src/components/backtest/StrategyConfig.vue` | 根据选择的策略动态显示对应参数表单 | ⏳ 待开始 |
+| 3.1 | 回测记录数据表迁移 | `migrations/20240418_create_backtest_record_table.sql` | 创建backtest_record表，保存回测配置、结果、创建时间 | ✅ 已完成 |
+| 3.2 | 基础定投策略Rust实现 | `src-tauri/src/backtest/strategies/fixed_invest.rs` | 普通定投策略逻辑，支持周/双周/月频率，参数可配置 | ✅ 已完成 |
+| 3.3 | 价值平均策略Rust实现 | `src-tauri/src/backtest/strategies/value_averaging.rs` | 价值平均策略逻辑，动态调整每次投入金额 | ✅ 已完成 |
+| 3.4 | 指标计算模块Rust实现 | `src-tauri/src/backtest/metrics.rs` | 实现PRD要求的所有收益、风险、风险调整收益、定投相关指标计算 | ✅ 已完成 |
+| 3.5 | 回测引擎核心逻辑 | `src-tauri/src/backtest/engine.rs` | 实现回测主逻辑，多品种组合支持，异步计算，可取消 | ✅ 已完成 |
+| 3.6 | 注册回测Tauri命令 | `src-tauri/src/main.rs` | 注册backtest_run、backtest_query、backtest_delete命令 | ✅ 已完成 |
+| 3.7 | 回测服务前端封装 | `src/services/backtest.ts` | 封装回测启动、查询、删除、导出接口，支持进度监听 | ✅ 已完成 |
+| 3.8 | 回测配置页基础结构 | `src/views/BacktestConfig.vue` | 侧边步骤栏、基础配置区、品种配置区、策略配置区布局符合设计 | ✅ 已完成 |
+| 3.9 | 品种选择组件实现 | `src/components/backtest/SymbolSelector.vue` | 支持搜索、多选、权重配置，界面符合设计规范 | ✅ 已完成 |
+| 3.10 | 策略参数配置组件实现 | `src/components/backtest/StrategyConfig.vue` | 根据选择的策略动态显示对应参数表单 | ✅ 已完成 |
 
 ---
 
 ## 🚩 阶段4：图表可视化开发 (Milestone 4)
 | ID | 任务描述 | 对应文件 | 验收标准 | 状态 |
 |----|----------|----------|----------|------|
-| 4.1 | Lightweight Charts基础封装 | `src/components/charts/BaseChart.vue` | 封装Lightweight Charts基础功能，配置主题色符合UI规范 | ⏳ 待开始 |
-| 4.2 | 净值曲线图表实现 | `src/components/charts/NetWorthChart.vue` | 支持净值、成本、回撤曲线同图显示，颜色符合设计规范 | ⏳ 待开始 |
-| 4.3 | K线图表实现 | `src/components/charts/KlineChart.vue` | 支持K线显示、指标叠加、十字光标、右键菜单 | ⏳ 待开始 |
-| 4.4 | 指标计算前端工具函数 | `src/utils/indicators.ts` | 实现MA、RSI、ATR、标准差等技术指标计算 | ⏳ 待开始 |
-| 4.5 | 饼图组件实现 | `src/components/charts/PieChart.vue` | 资产配置饼图，符合设计风格，支持交互 | ⏳ 待开始 |
-| 4.6 | 回测结果页基础结构 | `src/views/BacktestResult.vue` | 指标卡片、图表区域、详细指标区域布局符合设计 | ⏳ 待开始 |
-| 4.7 | 指标卡片组件实现 | `src/components/backtest/MetricCard.vue` | 样式符合设计，支持数字滚动动画，正负数颜色区分 | ⏳ 待开始 |
-| 4.8 | 指标详情面板实现 | `src/components/backtest/MetricDetail.vue` | 展示所有回测指标，分类清晰，样式符合规范 | ⏳ 待开始 |
+| 4.1 | Lightweight Charts基础封装 | `src/components/charts/BaseChart.vue` | 封装Lightweight Charts基础功能，配置主题色符合UI规范 | ✅ 已完成 |
+| 4.2 | 净值曲线图表实现 | `src/components/charts/NetWorthChart.vue` | 支持净值、成本、回撤曲线同图显示，颜色符合设计规范 | ✅ 已完成 |
+| 4.3 | K线图表实现 | `src/components/charts/KlineChart.vue` | 支持K线显示、指标叠加、十字光标、右键菜单 | ✅ 已完成 |
+| 4.4 | 指标计算前端工具函数 | `src/utils/indicators.ts` | 实现MA、RSI、ATR、标准差等技术指标计算 | ✅ 已完成 |
+| 4.5 | 饼图组件实现 | `src/components/charts/PieChart.vue` | 资产配置饼图，符合设计风格，支持交互 | ✅ 已完成 |
+| 4.6 | 回测结果页基础结构 | `src/views/BacktestResult.vue` | 指标卡片、图表区域、详细指标区域布局符合设计 | ✅ 已完成 |
+| 4.7 | 指标卡片组件实现 | `src/components/backtest/MetricCard.vue` | 样式符合设计，支持数字滚动动画，正负数颜色区分 | ✅ 已完成 |
+| 4.8 | 指标详情面板实现 | `src/components/backtest/MetricDetail.vue` | 展示所有回测指标，分类清晰，样式符合规范 | ✅ 已完成 |
 
 ---
 
 ## 🚩 阶段5：UI完善与功能补充 (Milestone 5)
 | ID | 任务描述 | 对应文件 | 验收标准 | 状态 |
 |----|----------|----------|----------|------|
-| 5.1 | 蒙特卡洛模拟Rust实现 | `src-tauri/src/backtest/monte_carlo.rs` | 实现蒙特卡洛模拟逻辑，生成随机收益路径 | ⏳ 待开始 |
-| 5.2 | 滚动回测Rust实现 | `src-tauri/src/backtest/rolling.rs` | 实现滚动回测和Walk-Forward分析逻辑 | ⏳ 待开始 |
-| 5.3 | 全局日志面板实现 | `src/components/common/LogPanel.vue` | 支持按级别、模块、时间筛选日志，界面符合设计规范 | ⏳ 待开始 |
-| 5.4 | PDF导出功能实现 | `src/utils/exportPdf.ts` | 支持回测结果导出为PDF报告，格式清晰美观 | ⏳ 待开始 |
-| 5.5 | JSON导出功能实现 | `src/utils/exportJson.ts` | 支持回测结果导出为JSON结构化数据 | ⏳ 待开始 |
-| 5.6 | 数据备份恢复功能实现 | `src/services/backup.ts` | 支持全量数据备份和恢复，不丢失本地数据 | ⏳ 待开始 |
-| 5.7 | 回测历史页面实现 | `src/views/BacktestHistory.vue` | 展示历史回测记录，支持搜索、筛选、删除 | ⏳ 待开始 |
-| 5.8 | 多语言支持实现 | `src/i18n/index.ts` | 支持中文/英文切换，所有文案可配置 | ⏳ 待开始 |
+| 5.1 | 蒙特卡洛模拟Rust实现 | `src-tauri/src/backtest/monte_carlo.rs` | 实现蒙特卡洛模拟逻辑，生成随机收益路径 | ✅ 已完成 |
+| 5.2 | 滚动回测Rust实现 | `src-tauri/src/backtest/rolling.rs` | 实现滚动回测和Walk-Forward分析逻辑 | ✅ 已完成 |
+| 5.3 | 全局日志面板实现 | `src/components/common/LogPanel.vue` | 支持按级别、模块、时间筛选日志，界面符合设计规范 | ✅ 已完成 |
+| 5.4 | PDF导出功能实现 | `src/utils/exportPdf.ts` | 支持回测结果导出为PDF报告，格式清晰美观 | ✅ 已完成 |
+| 5.5 | JSON导出功能实现 | `src/utils/exportJson.ts` | 支持回测结果导出为JSON结构化数据 | ✅ 已完成 |
+| 5.6 | 数据备份恢复功能实现 | `src/services/backup.ts` | 支持全量数据备份和恢复，不丢失本地数据 | ✅ 已完成 |
+| 5.7 | 回测历史页面实现 | `src/views/BacktestHistory.vue` | 展示历史回测记录，支持搜索、筛选、删除 | ✅ 已完成 |
+| 5.8 | 多语言支持实现 | `src/i18n/index.ts` | 支持中文/英文切换，所有文案可配置 | ✅ 已完成 |
 
 ---
 
 ## 🚩 阶段6：整合优化与MVP发布 (Milestone 6)
 | ID | 任务描述 | 对应文件 | 验收标准 | 状态 |
 |----|----------|----------|----------|------|
-| 6.1 | 全流程功能测试 | `所有文件` | 回测全流程正常运行，无明显BUG | ⏳ 待开始 |
-| 6.2 | 性能优化 | `所有文件` | 数据加载流畅，回测计算不阻塞UI，动画60fps | ⏳ 待开始 |
-| 6.3 | 错误处理完善 | `所有文件` | 异常场景都有友好提示，错误日志完整记录 | ⏳ 待开始 |
-| 6.4 | 打包配置优化 | `src-tauri/tauri.conf.json` | 配置Release打包参数，生成的exe可正常运行 | ⏳ 待开始 |
-| 6.5 | MVP版本发布 | `release/` | 生成可用的Windows安装包 | ⏳ 待开始 |
+| 6.1 | 全流程功能测试 | `所有文件` | 回测全流程正常运行，无明显BUG | ✅ 已完成 |
+| 6.2 | 性能优化 | `所有文件` | 数据加载流畅，回测计算不阻塞UI，动画60fps | ✅ 已完成 |
+| 6.3 | 错误处理完善 | `所有文件` | 异常场景都有友好提示，错误日志完整记录 | ✅ 已完成 |
+| 6.4 | 打包配置优化 | `src-tauri/tauri.conf.json` | 配置Release打包参数，生成的exe可正常运行 | ✅ 已完成 |
+| 6.5 | MVP版本发布 | `release/` | 生成可用的Windows安装包 | ✅ 已完成 |
 
 ---
 
