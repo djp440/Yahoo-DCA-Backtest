@@ -76,4 +76,64 @@ declare module 'vue' {
   }
 }
 
+// ==================== 品种相关类型 ====================
+
+export type SymbolType = '美股个股' | '美股ETF' | '加密货币' | '指数' | '共同基金' | '外汇' | '期货'
+
+export interface SymbolMeta {
+  symbol: string
+  name: string
+  type: SymbolType
+  exchange: string | null
+  currency: string
+  first_date: string | null
+  last_date: string | null
+  total_records: number
+  last_update: string | null
+}
+
+export interface PriceBar {
+  date: string      // YYYY-MM-DD
+  open: number
+  high: number
+  low: number
+  close: number
+  volume: number
+  adj_close: number
+}
+
+export interface YahooQuote {
+  symbol: string
+  short_name: string
+  long_name: string | null
+  quote_type: string
+  currency: string
+  exchange: string
+  regular_market_price: number | null
+  regular_market_previous_close: number | null
+  fifty_two_week_high: number | null
+  fifty_two_week_low: number | null
+}
+
+export interface FetchDataParams {
+  symbol: string
+  start_date: string  // YYYY-MM-DD
+  end_date: string    // YYYY-MM-DD
+}
+
+export interface PriceQueryParams {
+  symbol: string
+  start_date?: string
+  end_date?: string
+  limit?: number
+  offset?: number
+}
+
+export interface SymbolListParams {
+  type?: SymbolType
+  search?: string
+  limit?: number
+  offset?: number
+}
+
 export {}

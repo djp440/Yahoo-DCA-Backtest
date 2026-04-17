@@ -115,6 +115,18 @@ impl DbManager {
             self.apply_migration(1, migration_sql)?;
         }
 
+        // 迁移2: 创建价格数据表
+        if current_version < 2 {
+            let migration_sql = include_str!("../../migrations/20240417_create_price_data_table.sql");
+            self.apply_migration(2, migration_sql)?;
+        }
+
+        // 迁移3: 创建品种元数据表
+        if current_version < 3 {
+            let migration_sql = include_str!("../../migrations/20240417_create_symbol_meta_table.sql");
+            self.apply_migration(3, migration_sql)?;
+        }
+
         Ok(())
     }
 }
