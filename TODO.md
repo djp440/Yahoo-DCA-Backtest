@@ -43,7 +43,7 @@
 | 2.9 | 下拉选择组件实现 | `src/components/form/Select.vue` | 支持单选、多选，下拉菜单动画效果流畅 | ⏳ 待开始 |
 | 2.10 | 数据管理页基础结构 | `src/views/DataManager.vue` | 布局符合UI设计，包含搜索框、表格区域、操作按钮 | ⏳ 待开始 |
 | 2.11 | 虚拟表格组件实现 | `src/components/common/VirtualTable.vue` | 支持虚拟滚动、列宽调整、固定首列，性能流畅 | ⏳ 待开始 |
-| 2.12 | 启动自动更新数据逻辑 | `src/utils/autoUpdate.ts` | 应用启动时自动检查并更新本地数据，不阻塞UI | ⏳ 待开始 |
+| 2.12 | 启动自动更新数据逻辑 | `src/utils/autoUpdate.ts` | 应用启动时自动检查并更新本地数据，不阻塞UI | ✅ 已完成 |
 
 ---
 
