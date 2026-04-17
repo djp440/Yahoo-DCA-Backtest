@@ -6,26 +6,26 @@
 ## 🚩 阶段1：项目初始化与基础框架 (Milestone 1)
 | ID | 任务描述 | 对应文件 | 验收标准 | 状态 |
 |----|----------|----------|----------|------|
-| 1.1 | 初始化Tauri 2.0项目配置 | `src-tauri/tauri.conf.json` | 配置窗口大小、名称、权限，执行`tauri dev`能正常启动空白窗口 | ⏳ 待开始 |
-| 1.2 | 配置Vite + Vue 3基础工程 | `vite.config.ts` | 配置端口、路径别名，Vue3 + TypeScript编译正常 | ⏳ 待开始 |
-| 1.3 | 配置Tailwind CSS主题 | `tailwind.config.js` | 完全按UI_DESIGN.md配置颜色、字体、圆角、阴影、动画token | ⏳ 待开始 |
-| 1.4 | 配置全局样式 | `src/style.css` | 引入Tailwind基础样式，全局重置样式符合苹果设计风格 | ⏳ 待开始 |
-| 1.5 | TypeScript全局类型定义 | `src/types/global.d.ts` | 定义通用类型、Tauri命令返回值类型、日志类型 | ⏳ 待开始 |
-| 1.6 | Rust数据库连接配置 | `src-tauri/src/db.rs` | 实现SQLite连接池，初始化数据库实例，支持基本CRUD操作 | ⏳ 待开始 |
-| 1.7 | 日志表数据库迁移 | `migrations/20240416_create_app_log_table.sql` | 创建app_log表，包含id、level、module、content、timestamp、stack_trace字段 | ⏳ 待开始 |
-| 1.8 | 日志模块Rust后端实现 | `src-tauri/src/log.rs` | 实现日志写入、查询、清理接口，支持5个日志级别，按模块分类 | ⏳ 待开始 |
-| 1.9 | 注册日志Tauri命令 | `src-tauri/src/main.rs` | 注册log_write、log_query、log_clear命令到Tauri | ⏳ 待开始 |
-| 1.10 | 日志模块前端SDK封装 | `src/utils/log.ts` | 封装trace/debug/info/warn/error方法，全局异常捕获自动上报日志 | ⏳ 待开始 |
-| 1.11 | 顶部导航栏组件实现 | `src/components/layout/TopNav.vue` | 包含Logo、主菜单（回测/数据/历史）、全局操作区，样式完全符合UI规范 | ⏳ 待开始 |
-| 1.12 | Tab标签栏组件实现 | `src/components/layout/TabBar.vue` | 支持多标签页、关闭、新建、切换，动画效果符合设计规范 | ⏳ 待开始 |
-| 1.13 | 工作区容器组件实现 | `src/components/layout/Workspace.vue` | 自适应剩余高度，支持内容滚动，响应式适配 | ⏳ 待开始 |
-| 1.14 | 全局骨架屏组件实现 | `src/components/common/Skeleton.vue` | 支持卡片、列表、图表多种骨架类型，动画效果流畅 | ⏳ 待开始 |
-| 1.15 | 全局进度条组件实现 | `src/components/common/ProgressBar.vue` | 支持进度显示、取消操作，弹性动画效果 | ⏳ 待开始 |
-| 1.16 | Vue路由配置 | `src/router/index.ts` | 配置首页、回测配置、回测结果、数据管理四个页面路由 | ⏳ 待开始 |
-| 1.17 | 根布局组件实现 | `src/App.vue` | 整合TopNav+TabBar+Workspace，布局结构正确，响应式适配 | ⏳ 待开始 |
-| 1.18 | 首页/仪表盘基础结构 | `src/views/Dashboard.vue` | 页面布局符合UI设计，卡片组件样式正确 | ⏳ 待开始 |
-| 1.19 | 基础按钮组件实现 | `src/components/common/Button.vue` | 实现主/次/文字/危险四种按钮类型，hover/active效果符合规范 | ⏳ 待开始 |
-| 1.20 | 基础卡片组件实现 | `src/components/common/Card.vue` | 圆角、阴影、内边距完全符合UI设计规范 | ⏳ 待开始 |
+| 1.1 | 初始化Tauri 2.0项目配置 | `src-tauri/tauri.conf.json` | 配置窗口大小、名称、权限，执行`tauri dev`能正常启动空白窗口 | ✅ 已完成 |
+| 1.2 | 配置Vite + Vue 3基础工程 | `vite.config.ts` | 配置端口、路径别名，Vue3 + TypeScript编译正常 | ✅ 已完成 |
+| 1.3 | 配置Tailwind CSS主题 | `tailwind.config.js` | 完全按UI_DESIGN.md配置颜色、字体、圆角、阴影、动画token | ✅ 已完成 |
+| 1.4 | 配置全局样式 | `src/style.css` | 引入Tailwind基础样式，全局重置样式符合苹果设计风格 | ✅ 已完成 |
+| 1.5 | TypeScript全局类型定义 | `src/types/global.d.ts` | 定义通用类型、Tauri命令返回值类型、日志类型 | ✅ 已完成 |
+| 1.6 | Rust数据库连接配置 | `src-tauri/src/db.rs` | 实现SQLite连接池，初始化数据库实例，支持基本CRUD操作 | ✅ 已完成 |
+| 1.7 | 日志表数据库迁移 | `migrations/20240416_create_app_log_table.sql` | 创建app_log表，包含id、level、module、content、timestamp、stack_trace字段 | ✅ 已完成 |
+| 1.8 | 日志模块Rust后端实现 | `src-tauri/src/log.rs` | 实现日志写入、查询、清理接口，支持5个日志级别，按模块分类 | ✅ 已完成 |
+| 1.9 | 注册日志Tauri命令 | `src-tauri/src/lib.rs` | 注册log_write、log_query、log_clear命令到Tauri | ✅ 已完成 |
+| 1.10 | 日志模块前端SDK封装 | `src/utils/log.ts` | 封装trace/debug/info/warn/error方法，全局异常捕获自动上报日志 | ✅ 已完成 |
+| 1.11 | 顶部导航栏组件实现 | `src/components/layout/TopNav.vue` | 包含Logo、主菜单（回测/数据/历史）、全局操作区，样式完全符合UI规范 | ✅ 已完成 |
+| 1.12 | Tab标签栏组件实现 | `src/components/layout/TabBar.vue` | 支持多标签页、关闭、新建、切换，动画效果符合设计规范 | ✅ 已完成 |
+| 1.13 | 工作区容器组件实现 | `src/components/layout/Workspace.vue` | 自适应剩余高度，支持内容滚动，响应式适配 | ✅ 已完成 |
+| 1.14 | 全局骨架屏组件实现 | `src/components/common/Skeleton.vue` | 支持卡片、列表、图表多种骨架类型，动画效果流畅 | ✅ 已完成 |
+| 1.15 | 全局进度条组件实现 | `src/components/common/ProgressBar.vue` | 支持进度显示、取消操作，弹性动画效果 | ✅ 已完成 |
+| 1.16 | Vue路由配置 | `src/router/index.ts` | 配置首页、回测配置、回测结果、数据管理四个页面路由 | ✅ 已完成 |
+| 1.17 | 根布局组件实现 | `src/App.vue` | 整合TopNav+TabBar+Workspace，布局结构正确，响应式适配 | ✅ 已完成 |
+| 1.18 | 首页/仪表盘基础结构 | `src/views/Dashboard.vue` | 页面布局符合UI设计，卡片组件样式正确 | ✅ 已完成 |
+| 1.19 | 基础按钮组件实现 | `src/components/common/Button.vue` | 实现主/次/文字/危险四种按钮类型，hover/active效果符合规范 | ✅ 已完成 |
+| 1.20 | 基础卡片组件实现 | `src/components/common/Card.vue` | 圆角、阴影、内边距完全符合UI设计规范 | ✅ 已完成 |
 
 ---
 

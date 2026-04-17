@@ -53,9 +53,7 @@ target/
 
 # Exports
 *.pdf
-*.json
-*.csv
-*.xlsx
+# Keep package.json and tsconfig.json tracked - only export files ignored
 *.png
 *.svg
 
