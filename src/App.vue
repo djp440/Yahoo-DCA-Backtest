@@ -23,9 +23,15 @@ import TopNav from '@/components/layout/TopNav.vue'
 import TabBar from '@/components/layout/TabBar.vue'
 import Workspace from '@/components/layout/Workspace.vue'
 import { log } from './utils/log'
+import { runAutoUpdate } from '@/utils/autoUpdate'
 
-onMounted(() => {
+onMounted(async () => {
   log.info('ui', 'App组件挂载完成')
+  log.info('system', '应用已启动，启动数据更新检查')
+  // 不等待完成，避免阻塞UI
+  runAutoUpdate().catch(error => {
+    log.error('system', '自动更新执行异常', error)
+  })
 })
 
 function handleMenuChange(key: string) {
