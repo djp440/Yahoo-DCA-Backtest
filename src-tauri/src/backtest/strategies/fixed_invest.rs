@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use chrono::Datelike;
 
 /// 普通定投策略配置
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -66,21 +67,21 @@ impl FixedInvestStrategy {
             let should_invest = match frequency {
                 "weekly" => {
                     if let Some(w) = weekday {
-                        current.weekday().num_days_from_sunday() == w
+                        current.weekday().num_days_from_sunday() == w as u32
                     } else {
                         current.weekday().num_days_from_sunday() == 1 // 默认周一
                     }
                 }
                 "biweekly" => {
                     if let Some(w) = weekday {
-                        current.weekday().num_days_from_sunday() == w
+                        current.weekday().num_days_from_sunday() == w as u32
                     } else {
                         current.weekday().num_days_from_sunday() == 1
                     }
                 }
                 "monthly" => {
                     if let Some(d) = month_day {
-                        current.day() == d || (d > 28 && current.day() >= 28)
+                        current.day() == d as u32 || (d > 28 && current.day() >= 28)
                     } else {
                         current.day() == 1
                     }

@@ -57,6 +57,16 @@ impl ValuePosition {
 
     /// 更新目标市值
     pub fn update_target(&mut self, growth_rate: f64) {
-        self.target_value *= (1.0 + growth_rate);
+        self.target_value *= 1.0 + growth_rate;
+    }
+}
+
+/// 价值平均策略（Value Averaging）
+pub struct ValueAveragingStrategy;
+
+impl ValueAveragingStrategy {
+    /// 计算应投入金额，正数为买入，负数为卖出
+    pub fn calculate_investment(position: &ValuePosition, current_price: f64) -> f64 {
+        position.calculate_investment(current_price)
     }
 }

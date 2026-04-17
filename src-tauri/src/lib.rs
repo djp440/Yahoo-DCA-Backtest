@@ -2,6 +2,7 @@ pub mod db;
 pub mod log;
 pub mod data;
 pub mod yahoo;
+pub mod backtest;
 
 use crate::db::DbManager;
 use crate::log::{LogEntry, LogLevel, LogModule, LogQueryParams, LogService};
@@ -207,6 +208,23 @@ async fn data_delete_symbol(
     }
 }
 
+/// 执行回测命令，接收JSON字符串格式的回测请求，返回JSON字符串格式的回测结果
+#[tauri::command]
+async fn backtest_run(request: String) -> Result<String, String> {
+    use crate::backtest::{BacktestEngine, BacktestRequest};
+
+    // 解析回测请求参数
+    let req: BacktestRequest = serde_json::from_str(&request)
+        .map_err(|e| format!("解析请求参数失败: {}", e))?;
+
+    // 执行回测
+    let result = BacktestEngine::run(&req.config)
+        .map_err(|e| format!("回测执行失败: {}", e))?;
+
+    // 序列化结果为JSON
+    serde_json::to_string(&result).map_err(|e| format!("序列化结果失败: {}", e))
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -239,6 +257,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             log_write, log_query, log_clear,
             data_store, data_query, data_list_symbols, data_delete_symbol,
+            backtest_run,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
